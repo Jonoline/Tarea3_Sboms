@@ -9,6 +9,8 @@ RUN useradd -m -s /bin/bash appuser
 
 RUN pip install --break-system-packages semgrep
 
+RUN pip install --break-system-packages jupyter pandas matplotlib seaborn ipython
+
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
