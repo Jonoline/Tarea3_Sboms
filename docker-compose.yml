@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sbom-pipeline:latest
+    container_name: sbom-pipeline
+    volumes:
+      - ./pipeline/data:/app/data
+      - ./pipeline/src:/app/src
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - PYTHONUNBUFFERED=1
+    working_dir: /app
+    command: python src/main.py
+    restart: no
+    networks:
+      - sbom-net
+
+networks:
+  sbom-net:
+    driver: bridge
