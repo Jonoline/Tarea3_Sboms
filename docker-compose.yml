@@ -9,15 +9,32 @@ services:
     container_name: sbom-pipeline
     volumes:
       - ./pipeline/data:/app/data
-      - ./pipeline/src:/app/src
     environment:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - PYTHONUNBUFFERED=1
     working_dir: /app
     command: python src/main.py
     restart: no
-    networks:
-      - sbom-net
+    env_file: .env
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sbom-pipeline:latest
+    container_name: sbom-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./pipeline/data:/app/data
+      - ./analysis:/app/analysis
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - PYTHONUNBUFFERED=1
+    working_dir: /app
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+    restart: no
+    env_file: .env
 
 networks:
   sbom-net:

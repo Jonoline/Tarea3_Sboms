@@ -42,22 +42,19 @@ Tarea3_Sboms/
 
 ## Uso
 
-### 1. Configurar Token de GitHub
+### 1. Clonar y Configurar
 
-Crear archivo `.env`:
 ```bash
-GITHUB_TOKEN=tu_token_aqui
+git clone https://github.com/Jonoline/Tarea3_Sboms.git
+cd Tarea3_Sboms
+cp .env.example .env
+# Editar .env con GITHUB_TOKEN
 ```
 
-O.exportar variable:
-```bash
-export GITHUB_TOKEN=tu_token
-```
-
-### 2. Ejecutar el Pipeline
+### 2. Ejecutar el Pipeline (Escaneo)
 
 ```bash
-docker-compose up --build
+docker-compose up --build pipeline
 ```
 
 Esto clonará los 38 repositorios de EbookFoundation y ejecutará:
@@ -70,13 +67,33 @@ Los resultados se guardan en `pipeline/data/raw/`.
 ### 3. Ejecutar el Notebook de Análisis
 
 ```bash
-cd analysis
-jupyter notebook SBOM_Analysis.ipynb
+docker-compose up --build jupyter
 ```
 
-O desde Docker:
+Luego abrir en el navegador: **http://localhost:8888**
+
+El token de Jupyter se puede obtener con:
 ```bash
-docker run --rm -v $(pwd)/../pipeline/data:/app/data -p 8888:8888 sbom-pipeline jupyter notebook --ip=0.0.0.0
+docker-compose logs jupyter
+```
+
+## Ejecución Rápida
+
+```bash
+# 1. Clonar
+git clone https://github.com/Jonoline/Tarea3_Sboms.git
+cd Tarea3_Sboms
+
+# 2. Configurar token
+cp .env.example .env
+# Editar .env
+
+# 3. Ejecutar pipeline (30-45 min)
+docker-compose up --build pipeline
+
+# 4. Ejecutar análisis
+docker-compose up --build jupyter
+# Abrir http://localhost:8888
 ```
 
 ## Herramientas Utilizadas
