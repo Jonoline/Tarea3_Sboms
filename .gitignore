@@ -1,7 +1,11 @@
 .Dockerfile
 .docker-compose.yml
 .env
-data/
+pipeline/data/repos/
+pipeline/data/raw/repos/
+pipeline/data/raw/sast_*.json
+pipeline/data/raw/sbom_*.json
+pipeline/data/raw/sca_*.json
 __pycache__/
 *.pyc
 venv/
