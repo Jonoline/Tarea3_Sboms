@@ -32,7 +32,7 @@ services:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - PYTHONUNBUFFERED=1
     working_dir: /app
-    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
     restart: no
     env_file: .env
 

@@ -47,7 +47,7 @@ Tarea3_Sboms/
 ```bash
 git clone https://github.com/Jonoline/Tarea3_Sboms.git
 cd Tarea3_Sboms
-cp .env.example .env
+# Cambiar .env.example a .env
 # Editar .env con GITHUB_TOKEN
 ```
 
@@ -72,29 +72,6 @@ docker-compose up --build jupyter
 
 Luego abrir en el navegador: **http://localhost:8888**
 
-El token de Jupyter se puede obtener con:
-```bash
-docker-compose logs jupyter
-```
-
-## Ejecución Rápida
-
-```bash
-# 1. Clonar
-git clone https://github.com/Jonoline/Tarea3_Sboms.git
-cd Tarea3_Sboms
-
-# 2. Configurar token
-cp .env.example .env
-# Editar .env
-
-# 3. Ejecutar pipeline (30-45 min)
-docker-compose up --build pipeline
-
-# 4. Ejecutar análisis
-docker-compose up --build jupyter
-# Abrir http://localhost:8888
-```
 
 ## Herramientas Utilizadas
 
